@@ -14,6 +14,7 @@ from typing import (
     List,
     Mapping,
     Optional,
+    Set,
     Tuple,
     Type,
     TypeVar,
@@ -549,6 +550,7 @@ class Document(
         session: Optional[ClientSession] = None,
         link_rule: WriteRules = WriteRules.DO_NOTHING,
         ignore_revision: bool = False,
+        exclude: Optional[Set[str]] = None,
         **kwargs,
     ) -> DocType:
         """
@@ -598,6 +600,7 @@ class Document(
                     get_dict(
                         self,
                         to_db=True,
+                        exclude=exclude,
                         keep_nulls=self.get_settings().keep_nulls,
                     )
                 ),
@@ -613,6 +616,7 @@ class Document(
                     get_dict(
                         self,
                         to_db=True,
+                        exclude=exclude,
                         keep_nulls=self.get_settings().keep_nulls,
                     )
                 ),
